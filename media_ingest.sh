@@ -17,3 +17,11 @@ else
     echo "Usage: $(basename "$0") <input directory> <output directory>"
     exit 1
 fi
+
+# List all files in the input directory and subdirectories
+files_list=($(find "$input_dir" -type f))
+
+# Copy all files in the input directory to output directory 
+for file in "${files_list[@]}"; do
+    cp "$file" $output_dir
+done
