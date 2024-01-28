@@ -18,8 +18,24 @@ else
     exit 1
 fi
 
-# filtering: file type or everything, user defined name
+file_filter() {
+    local all_file=($(find "$input_dir" -type f))
+    for file in "${all_file[@]}"; do
+        local file_type=$(file -b --mime-type "$file")
 
+        if [[ $file_type == "video/"* ]]; then
+            echo "$file"
+        elif [[ $file_type == "image/"* ]]; then
+            echo "$file"
+        elif [[ $file_type == "audio/"* ]]; then
+            echo "$file"
+        else
+            echo "This is not a video, image, or audio file"
+        fi
+    done
+}
+
+# User selected filter for specific file types
 file_type() {
     local PS3="Select a file type: "
     local file_type=("Video" "Image" "Audio" "Exit")
@@ -27,15 +43,15 @@ file_type() {
     select choice in "${file_type[@]}"; do
         case "$choice" in
             "Video")
-                echo "video'"
+                file_filter
                 break
                 ;;
             "Image")
-                echo "image'"
+                file_filter
                 break
                 ;;
             "Audio")
-                echo "audio"
+                file_filter
                 break
                 ;;            
             "Exit")
@@ -60,6 +76,7 @@ select choice in "${file_choice[@]}"; do
             break
             ;;
         "File Type")
+            # Call the file_type function
             file_type
             break
             ;;
