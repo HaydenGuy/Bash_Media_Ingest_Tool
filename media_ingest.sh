@@ -22,9 +22,9 @@ fi
 
 # User selected filter for all files or specific file types
 PS3="Convert everything or specific file type?"
-options=("All Files" "File Type" "Exit")
+file_choice=("All Files" "File Type" "Exit")
 
-select choice in "${options[@]}"; do
+select choice in "${file_choice[@]}"; do
     case "$choice" in
         "All Files")
             # List all files in the input directory and subdirectories
@@ -39,7 +39,7 @@ select choice in "${options[@]}"; do
             exit 1
             ;;
         *)
-            echo -e "\nInvalid option. Please enter a number from 1 to ${#options[@]}\n"
+            echo -e "\nInvalid option. Please enter a number from 1 to ${#file_choice[@]}\n"
             ;;
     esac
 done
