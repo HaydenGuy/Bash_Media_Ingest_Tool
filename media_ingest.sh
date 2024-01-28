@@ -27,9 +27,12 @@ options=("All Files" "File Type" "Exit")
 select choice in "${options[@]}"; do
     case "$choice" in
         "All Files")
+            # List all files in the input directory and subdirectories
+            files_list=($(find "$input_dir" -type f))
             break
             ;;
         "File Type")
+            # Another filter for the type of file
             break
             ;;
         "Exit")
@@ -40,9 +43,6 @@ select choice in "${options[@]}"; do
             ;;
     esac
 done
-
-# List all files in the input directory and subdirectories
-files_list=($(find "$input_dir" -type f))
 
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
