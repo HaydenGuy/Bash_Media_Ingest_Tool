@@ -18,10 +18,33 @@ else
     exit 1
 fi
 
+# filtering: file type or everything, user defined name
+
+# User selected filter for all files or specific file types
+PS3="Convert everything or specific file type?"
+options=("All Files" "File Type" "Exit")
+
+select choice in "${options[@]}"; do
+    case "$choice" in
+        "All Files")
+            break
+            ;;
+        "File Type")
+            break
+            ;;
+        "Exit")
+            exit 1
+            ;;
+        *)
+            echo -e "\nInvalid option. Please enter a number from 1 to ${#options[@]}\n"
+            ;;
+    esac
+done
+
 # List all files in the input directory and subdirectories
 files_list=($(find "$input_dir" -type f))
 
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
-    cp "$file" $output_dir
+    cp "$file" "$output_dir"
 done
