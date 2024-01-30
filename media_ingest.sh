@@ -18,19 +18,14 @@ else
     exit 1
 fi
 
+# Filter that looks at every file and adds those of a certain type to files_list
 file_filter() {
     local all_file=($(find "$input_dir" -type f))
     for file in "${all_file[@]}"; do
         local file_type=$(file -b --mime-type "$file")
 
-        if [[ $file_type == "video/"* ]]; then
-            echo "$file"
-        elif [[ $file_type == "image/"* ]]; then
-            echo "$file"
-        elif [[ $file_type == "audio/"* ]]; then
-            echo "$file"
-        else
-            echo "This is not a video, image, or audio file"
+        if [[ $file_type == "$user_choice/"* ]]; then
+            files_list+="$file"            
         fi
     done
 }
@@ -43,14 +38,18 @@ file_type() {
     select choice in "${file_type[@]}"; do
         case "$choice" in
             "Video")
+                # Call the file filter function
+                user_choice="video"
                 file_filter
                 break
                 ;;
             "Image")
+                user_choice="image"
                 file_filter
                 break
                 ;;
             "Audio")
+                user_choice="audio"
                 file_filter
                 break
                 ;;            
