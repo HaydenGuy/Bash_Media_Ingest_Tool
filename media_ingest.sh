@@ -25,7 +25,7 @@ file_filter() {
         local file_type=$(file -b --mime-type "$file")
 
         if [[ $file_type == "$user_choice/"* ]]; then
-            files_list+="$file"            
+            files_list+=("$file")   
         fi
     done
 }
@@ -90,5 +90,5 @@ done
 
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
-    cp "$file" "$output_dir"
+    mv "$file" "$output_dir"
 done
