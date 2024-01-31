@@ -88,7 +88,23 @@ select choice in "${file_choice[@]}"; do
     esac
 done
 
+echo "What should the files be named?"
+read name # Takes user input for name
+
+count=1
+
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
-    mv "$file" "$output_dir"
+
+    # Gets extension by removing everything before the dot (##*)
+    extension="${file##*.}"
+
+    # Generate the new filename with leading zeros
+    file_name=$(printf "%s%04d.%s" "$name" "$count" "$extension")
+
+    # Copies the file from the input and moves it to the output with a new file name
+    cp "$file" "$output_dir/$file_name"
+
+    # Increase count by 1
+    ((count++))
 done
