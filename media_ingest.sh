@@ -93,6 +93,8 @@ read name # Takes user input for name
 
 count=1
 
+touch "$output_dir/ingest_log.txt" 
+
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
 
