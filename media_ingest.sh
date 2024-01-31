@@ -93,8 +93,6 @@ read name # Takes user input for name
 
 count=1
 
-touch "$output_dir/ingest_log.txt" 
-
 # Copy all files in the input directory to output directory 
 for file in "${files_list[@]}"; do
 
@@ -106,6 +104,9 @@ for file in "${files_list[@]}"; do
 
     # Copies the file from the input and moves it to the output with a new file name
     cp "$file" "$output_dir/$file_name"
+
+    # Add the file name to a file called ingest_log
+    echo "$file --> $file_name" >> "ingest_log.txt"
 
     # Increase count by 1
     ((count++))
