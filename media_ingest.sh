@@ -108,3 +108,7 @@ for file in "${files_list[@]}"; do
     # Increase count by 1
     ((count++))
 done
+
+echo "------------------------------"
+echo "Media ingest process complete."
+echo ""
