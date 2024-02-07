@@ -106,7 +106,7 @@ for file in "${files_list[@]}"; do
     cp "$file" "$output_dir/$file_name"
 
     # Add the file name to a file called ingest_log
-    echo "$file --> $file_name" >> "ingest_log.txt"
+    echo "$file --> $output_dir$file_name" >> "$output_dir/ingest_log.txt"
 
     # Increase count by 1
     ((count++))
